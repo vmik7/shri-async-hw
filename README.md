@@ -112,7 +112,7 @@ function reduce(
 Реализовать операцию [filter](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/Filter) для асинхронного массива.
 
 ```ts
-function map(
+function filter(
     array: AsyncArray,
     fn: (cur: any, idx: Number, src: AsyncArray) => Boolean,
     cb: (result: AsyncArray) => void) {
