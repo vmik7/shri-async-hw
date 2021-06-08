@@ -1,0 +1,37 @@
+Посмотрите код страницы и вывод в консоль браузера.
+
+<div class="coord"></div>
+
+<script src="../shri-async-hw.js"></script>
+<script src="task.js"></script>
+<script>
+    const {
+        AsyncArray,
+        add,
+        subtract,
+        multiply,
+        divide,
+        mod,
+        less,
+        equal,
+        lessOrEqual,
+        sqrt
+    } = Homework;
+
+    // Массив для примера
+    let a = new AsyncArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
+
+    console.log('ищем среднее арифметическое массива');
+    getAverage(a, result => {
+        console.log('результат', result);
+    });
+    a.print();
+
+    // Во время выполения функции будем прослушивать событие mousemove
+    // - доказательство того, что всё рабротает ассинхронно
+    const coord = document.querySelector('.coord');
+    window.addEventListener('mousemove', (e) => {
+        coord.innerHTML = e.clientX + '<br/>' + e.clientY;
+    });
+
+</script>
