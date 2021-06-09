@@ -15,7 +15,7 @@ Promise._any = function(promises) {
                 errors.push(e);
                 pendingCount--;
                 if (pendingCount === 0) {
-                    throw new AggregateError(errors, 'All Promises rejected');
+                    reject(new AggregateError(errors, 'All Promises rejected'));
                 }
             });
         }); 
@@ -23,7 +23,7 @@ Promise._any = function(promises) {
 }
 
 Promise._allSettled = function(promises) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         
         let pendingCount = promises.length;
         let results = [];

@@ -1,74 +1,97 @@
-<script src="bonus.js"></script>
-<script>
-    // Promise._any([
-    //     // new Promise((resolve, reject) => {
-    //     //     setTimeout(() => resolve(50), 50);
-    //     // }),
-    //     new Promise((resolve, reject) => {
-    //         setTimeout(() => reject(50), 50);
-    //     }),
-    //     new Promise((resolve, reject) => {
-    //         setTimeout(() => reject(100), 100);
-    //     }),
-    //     new Promise((resolve, reject) => {
-    //         setTimeout(() => reject(500), 500);
-    //     }),
-    //     new Promise((resolve, reject) => {
-    //         setTimeout(() => reject(1000), 1000);
-    //     })
-    // ]).then(first => {
-    //     console.log(first);
-    // }).catch(e => {
-    //     console.log(e.name);
-    //     console.log(e.message);
-    //     console.log(e.errors);
-    // });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Посмотрите на <a href="bonus.js" class="link">реализацию функций</a>, код страницы и вывод в консоль браузера.
 
-    // Promise._allSettled([
-    //     new Promise((resolve, reject) => {
-    //         setTimeout(() => resolve(50), 50);
-    //     }),
-    //     new Promise((resolve, reject) => {
-    //         setTimeout(() => reject(50), 50);
-    //     }),
-    //     new Promise((resolve, reject) => {
-    //         setTimeout(() => resolve(100), 100);
-    //     }),
-    //     new Promise((resolve, reject) => {
-    //         setTimeout(() => reject(500), 500);
-    //     }),
-    //     new Promise((resolve, reject) => {
-    //         setTimeout(() => reject(1000), 1000);
-    //     })
-    // ]).then(results => {
-    //     results.forEach(console.log);
-    // }).catch(e => {
-    //     throw e;
-    // });
+    <script src="bonus.js"></script>
+    <script>
 
-    // new Promise((resolve, reject) => {
-    //     setTimeout(() => resolve(500), 500);
-    // }).then(res => {
-    //     console.log('First then: ', res);
-    //     return new Promise((resolve, reject) => {
-    //         setTimeout(() => resolve(1000), 1000);
-    //     });
-    // })._finally(() => {
-    //     console.log('finally... ');
-    // }).then(res => {
-    //     console.log('Second then: ', res);
-    // });
+         // Проверяем _any
+        Promise._any([
+            new Promise((resolve, reject) => {
+                setTimeout(() => reject(50), 50);
+            }),
+            new Promise((resolve, reject) => {
+                setTimeout(() => resolve(100), 100);
+            }),
+            new Promise((resolve, reject) => {
+                setTimeout(() => reject(500), 500);
+            })
+        ]).then(first => {
+            console.group('Провека _any');
+            console.log('первый успешный промис:');
+            console.log(first);
+        }).catch(e => {
+            console.log(e.name);
+            console.log(e.message);
+            console.log(e.errors);
+        });
 
-    // new Promise((resolve, reject) => {
-    //     setTimeout(() => resolve(500), 500);
-    // }).then(res => {
-    //     console.log('First then: ', res);
-    //     return new Promise((resolve, reject) => {
-    //         setTimeout(() => reject(1000), 1000);
-    //     });
-    // })._finally(() => {
-    //     console.log('finally... ');
-    // }).catch(e => {
-    //     console.log('Second then: ', e);
-    // });
-</script>
+        // Проверяем _any, когда все промисы rejected
+        Promise._any([
+            new Promise((resolve, reject) => {
+                setTimeout(() => reject(50), 50);
+            }),
+            new Promise((resolve, reject) => {
+                setTimeout(() => reject(100), 100);
+            }),
+            new Promise((resolve, reject) => {
+                setTimeout(() => reject(500), 500);
+            })
+        ]).then(first => {
+            console.log(first);
+        }).catch(e => {
+            console.log('тут все промисы завершатся со статусом rejected, получаем массив ошибок:');
+            console.log(e);
+            console.log(e.errors);
+            console.groupEnd();
+        });
+    
+        // Проверяем _allSettled
+        Promise._allSettled([
+            new Promise((resolve, reject) => {
+                setTimeout(() => resolve(50), 50);
+            }),
+            new Promise((resolve, reject) => {
+                setTimeout(() => reject(50), 50);
+            }),
+            new Promise((resolve, reject) => {
+                setTimeout(() => resolve(100), 100);
+            }),
+            new Promise((resolve, reject) => {
+                setTimeout(() => reject(500), 500);
+            }),
+            new Promise((resolve, reject) => {
+                setTimeout(() => reject(1000), 1000);
+            })
+        ]).then(results => {
+            console.group('Провека _allSettled');
+            console.log('массив результатов исполнения полученных промисов:');
+            console.log(results);
+            console.groupEnd();
+        }).catch(e => {
+            throw e;
+        });
+    
+        // Проверяем _finally
+        new Promise((resolve, reject) => {
+            setTimeout(() => resolve(1500), 1500);
+        }).then(res => {
+            console.group('Проверка _finally');
+            console.log('первый then:', res);
+            return res;
+        })._finally(() => {
+            console.log('блок _finally (передаём результат дальше...)');
+        }).then(res => {
+            console.log('второй then:', res);
+            console.groupEnd();
+        });
+    </script>
+</body>
+</html>
