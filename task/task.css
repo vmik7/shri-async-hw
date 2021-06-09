@@ -1,0 +1,45 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+.page__info {
+    padding: 50px 100px;
+}
+.page__cat-field {
+    flex: 1;
+    position: relative;
+}
+
+
+.paragraph {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 10px;
+}
+
+.link {
+}
+
+.cat {
+    width: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+
+    transform: translate(-50%, -50%);
+}
+.cat img {
+    max-width: 100%;
+}

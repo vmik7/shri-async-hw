@@ -1,37 +1,55 @@
-Посмотрите код страницы и вывод в консоль браузера.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-<div class="coord"></div>
+    <link rel="stylesheet" href="task.css">
+    <script src="../shri-async-hw.js"></script>
+</head>
+<body class="page">
 
-<script src="../shri-async-hw.js"></script>
-<script src="task.js"></script>
-<script>
-    const {
-        AsyncArray,
-        add,
-        subtract,
-        multiply,
-        divide,
-        mod,
-        less,
-        equal,
-        lessOrEqual,
-        sqrt
-    } = Homework;
+    <div class="page__info">
+        <p class="paragraph">
+            Посмотрите <a href="task.js" class="link">исходный JS-код</a> и вывод в консоль браузера.
+        </p>
+    
+        <p class="paragraph">
+            Пока ждём результат, можно поиграться с котиком - он довольно послушный :)
+        </p>
+    </div>
+    <div class="page__cat-field">
+        <div class="cat">
+            <img src="happy.svg" alt="kitten">
+        </div>
+    </div>
 
-    // Массив для примера
-    let a = new AsyncArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
+    <script src="task.js"></script>
+    <script>
+        const cat = document.querySelector('.cat');
+        const catHome = document.querySelector('.page__cat-field');
 
-    console.log('ищем среднее арифметическое массива');
-    getAverage(a, result => {
-        console.log('результат', result);
-    });
-    a.print();
+        function moveCat(event) {
+            let posX = event.clientX - catHome.offsetLeft;
+            posX = Math.max(posX, Math.ceil(cat.clientWidth / 2));
+            posX = Math.min(posX, catHome.clientWidth - Math.floor(cat.clientWidth / 2));
 
-    // Во время выполения функции будем прослушивать событие mousemove
-    // - доказательство того, что всё рабротает ассинхронно
-    const coord = document.querySelector('.coord');
-    window.addEventListener('mousemove', (e) => {
-        coord.innerHTML = e.clientX + '<br/>' + e.clientY;
-    });
+            let posY = event.clientY - catHome.offsetTop;
+            posY = Math.max(posY, Math.ceil(cat.clientHeight / 2));
+            posY = Math.min(posY, catHome.clientHeight - Math.floor(cat.clientHeight / 2));
 
-</script>
+            cat.style.left = posX + 'px';
+            cat.style.top = posY + 'px';
+        }
+
+        window.addEventListener('mousemove', moveCat);
+        window.addEventListener('click', (event) => {
+            window.removeEventListener('mousemove', moveCat);
+        });
+    </script>
+</body>
+</html>
+
+
