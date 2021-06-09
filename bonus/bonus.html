@@ -1,0 +1,74 @@
+<script src="bonus.js"></script>
+<script>
+    // Promise._any([
+    //     // new Promise((resolve, reject) => {
+    //     //     setTimeout(() => resolve(50), 50);
+    //     // }),
+    //     new Promise((resolve, reject) => {
+    //         setTimeout(() => reject(50), 50);
+    //     }),
+    //     new Promise((resolve, reject) => {
+    //         setTimeout(() => reject(100), 100);
+    //     }),
+    //     new Promise((resolve, reject) => {
+    //         setTimeout(() => reject(500), 500);
+    //     }),
+    //     new Promise((resolve, reject) => {
+    //         setTimeout(() => reject(1000), 1000);
+    //     })
+    // ]).then(first => {
+    //     console.log(first);
+    // }).catch(e => {
+    //     console.log(e.name);
+    //     console.log(e.message);
+    //     console.log(e.errors);
+    // });
+
+    // Promise._allSettled([
+    //     new Promise((resolve, reject) => {
+    //         setTimeout(() => resolve(50), 50);
+    //     }),
+    //     new Promise((resolve, reject) => {
+    //         setTimeout(() => reject(50), 50);
+    //     }),
+    //     new Promise((resolve, reject) => {
+    //         setTimeout(() => resolve(100), 100);
+    //     }),
+    //     new Promise((resolve, reject) => {
+    //         setTimeout(() => reject(500), 500);
+    //     }),
+    //     new Promise((resolve, reject) => {
+    //         setTimeout(() => reject(1000), 1000);
+    //     })
+    // ]).then(results => {
+    //     results.forEach(console.log);
+    // }).catch(e => {
+    //     throw e;
+    // });
+
+    // new Promise((resolve, reject) => {
+    //     setTimeout(() => resolve(500), 500);
+    // }).then(res => {
+    //     console.log('First then: ', res);
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => resolve(1000), 1000);
+    //     });
+    // })._finally(() => {
+    //     console.log('finally... ');
+    // }).then(res => {
+    //     console.log('Second then: ', res);
+    // });
+
+    // new Promise((resolve, reject) => {
+    //     setTimeout(() => resolve(500), 500);
+    // }).then(res => {
+    //     console.log('First then: ', res);
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => reject(1000), 1000);
+    //     });
+    // })._finally(() => {
+    //     console.log('finally... ');
+    // }).catch(e => {
+    //     console.log('Second then: ', e);
+    // });
+</script>
