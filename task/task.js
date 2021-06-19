@@ -1,38 +1,28 @@
-const { AsyncArray } = Homework;
+const {
+    AsyncArray,
+    add, subtract, multiply, divide, mod,
+    less, equal, lessOrEqual,
+    sqrt,
+} = Homework;
 
-const api = {
-    length: (arr) => new Promise(resolve => arr.length(resolve)),
-    set: (arr, index, value) => new Promise(resolve => arr.set(index, value, resolve)),
-    get: (arr, index) => new Promise(resolve => arr.get(index, resolve)),
-    push: (arr, value) => new Promise(resolve => arr.push(value, resolve)),
-    pop: (arr) => new Promise(resolve => arr.pop(resolve)),
-
-    add: (a, b) => new Promise(resolve => Homework.add(a, b, resolve)),
-    subtract: (a, b) => new Promise(resolve => Homework.subtract(a, b, resolve)),
-    multiply: (a, b) => new Promise(resolve => Homework.multiply(a, b, resolve)),
-    divide: (a, b) => new Promise(resolve => Homework.divide(a, b, resolve)),
-    mod: (a, b) => new Promise(resolve => Homework.mod(a, b, resolve)),
-    less: (a, b) => new Promise(resolve => Homework.less(a, b, resolve)),
-    equal: (a, b) => new Promise(resolve => Homework.equal(a, b, resolve)),
-    lessOrEqual: (a, b) => new Promise(resolve => Homework.lessOrEqual(a, b, resolve)),
-    sqrt: (x) => new Promise(resolve => Homework.sqrt(x, resolve))
+function exec(fn, ...args) {
+    return new Promise(resolve => fn(...args, resolve))
 }
-
 
 async function getAverage(array, cb) {
 
-    let length = await api.length(array);
+    let length = await exec(array.length);
 
     let sum = 0;
     let i = 0;
 
-    while (await api.less(i, length)) {
-        let currentValue = await api.get(array, i);
-        sum = await api.add(sum, currentValue);
-        i = await api.add(i, 1);
+    while (await exec(less, i, length)) {
+        let currentValue = await exec(array.get, i);
+        sum = await exec(add, sum, currentValue);
+        i = await exec(add, i, 1);
     }
 
-    let answer = await api.divide(sum, i);
+    let answer = await exec(divide, sum, i);
 
     cb(answer);
 }
